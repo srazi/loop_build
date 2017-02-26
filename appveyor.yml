@@ -1,0 +1,19 @@
+version: 1.0.0.{build}-{branch}
+
+build_script:
+  - echo "Dummy loop build" > loop_build.txt
+  - timeout 60
+
+artifacts:
+   - path: loop_build.txt
+     name: loop_build (%appveyor_build_version%)
+
+deploy:
+    release: loop_build-v$(appveyor_build_version)
+    description: 'loop_build for tag $(appveyor_repo_tag_name)'
+    provider: GitHub
+    auth_token:
+      secure: BumEo5ic9KIrhc8RxwsKFd/L6WwC0s5LpSef9uH+PtUKICZBZAcyqnPewKUqzEFi # your encrypted token from GitHub
+    artifact: loop_build.txt             # Archived bin directory
+    draft: false
+    prerelease: false
