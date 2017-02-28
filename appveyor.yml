@@ -3,8 +3,10 @@ skip_tags: true
 
 build_script:
   - echo "Dummy loop build" > loop_build.txt
-  - ps: (New-Object Net.WebClient).DownloadFile("http://nsis.sourceforge.net/mediawiki/images/5/53/KillProcDll%26FindProcDll.zip", "$env:APPVEYOR_BUILD_FOLDER\KillProcDll&FindProcDll.zip")
   - dir
+  - ps: If (![System.IO.File]::Exists("$env:APPVEYOR_BUILD_FOLDER\KillProcDll&FindProcDll.zip")) { (New-Object Net.WebClient).DownloadFile("http://nsis.sourceforge.net/mediawiki/images/5/53/KillProcDll%26FindProcDll.zip", "$env:APPVEYOR_BUILD_FOLDER\KillProcDll&FindProcDll.zip") } ELse { echo "EXIST SKIP DOWNLOAD!" }
+  - dir
+  - ps: If (![System.IO.File]::Exists("env:APPVEYOR_BUILD_FOLDER\KillProcDll&FindProcDll.zip")) { echo "ERROR" } ELse {echo "OK"}
   - timeout 60
 
 artifacts:
