@@ -1,4 +1,5 @@
 version: 1.0.0.{build}-{branch}
+skip_tags: true
 
 build_script:
   - echo "Dummy loop build" > loop_build.txt
