@@ -6,7 +6,7 @@ build_script:
   - ps: If (![System.IO.File]::Exists("$env:APPVEYOR_BUILD_FOLDER\KillProcDll&FindProcDll.zip")) { (New-Object Net.WebClient).DownloadFile("http://nsis.sourceforge.net/mediawiki/images/5/53/KillProcDll%26FindProcDll.zip", "$env:APPVEYOR_BUILD_FOLDER\KillProcDll&FindProcDll.zip") } ELse { echo "EXIST SKIP DOWNLOAD!" }
   - dir
   - ps: If (![System.IO.File]::Exists("env:APPVEYOR_BUILD_FOLDER\KillProcDll&FindProcDll.zip")) { echo "ERROR" } ELse {echo "OK"}
-  - timeout 60
+  - timeout 5
 
 artifacts:
    - path: loop_build.txt
