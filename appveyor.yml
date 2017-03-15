@@ -12,6 +12,12 @@ artifacts:
    - path: loop_build.txt
      name: loop_build (%appveyor_build_version%)
 
+init:
+  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+
+on_finish:
+  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+
 deploy:
     release: loop_build-v$(appveyor_build_version)
     description: 'loop_build for tag $(appveyor_repo_tag_name)'
