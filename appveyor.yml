@@ -1,5 +1,8 @@
 version: 1.0.2.{build}-{branch}
 
+image:
+    - Visual Studio 2017
+
 build_script:
   - echo "Dummy loop build" > loop_build.txt
   - dir
